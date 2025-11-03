@@ -1,0 +1,63 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AccessTokenObject {
+  access_token: String
+}
+
+input CreateUserInput {
+  displayName: String
+  password: String!
+  role: String! = "utilisateur"
+  username: String!
+}
+
+type CurrentUserResponse {
+  status: Int!
+  success: AccessTokenObject!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type LoginResponse {
+  access_token: String
+  name: String
+}
+
+input LoginUserInput {
+  password: String!
+  username: String!
+}
+
+type Mutation {
+  createUser(createUserInput: CreateUserInput!): UserResponse!
+  login(loginUserInput: LoginUserInput!): LoginResponse!
+  logout: LoginResponse!
+  removeUser(id: String!): UserResponse!
+}
+
+type Query {
+  current: CurrentUserResponse!
+  getAllUsers: [User!]!
+  getUserById(id: String!): User!
+  getUserByUsername(username: String!): User!
+}
+
+type User {
+  createdAt: DateTime!
+  displayName: String!
+  id: String!
+  password: String!
+  role: String!
+  updatedAt: DateTime!
+  username: String!
+}
+
+type UserResponse {
+  message: String!
+  statusCode: Int!
+}
