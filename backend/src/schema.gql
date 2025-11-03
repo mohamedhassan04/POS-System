@@ -4,6 +4,8 @@
 
 type AccessTokenObject {
   access_token: String
+  id: String
+  name: String
 }
 
 input CreateUserInput {

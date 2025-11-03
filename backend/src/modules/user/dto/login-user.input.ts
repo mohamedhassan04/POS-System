@@ -25,6 +25,10 @@ export class LoginResponse {
 export class AccessTokenObject {
   @Field(() => String, { nullable: true })
   access_token?: string;
+  @Field(() => String, { nullable: true })
+  name: string;
+  @Field(() => String, { nullable: true })
+  id: string;
 }
 
 @ObjectType()

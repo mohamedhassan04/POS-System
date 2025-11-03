@@ -41,9 +41,12 @@ export class AuthenticationResolver {
   @UseGuards(JwtAuthGuard)
   async current(@Context() context: any): Promise<CurrentUserResponse> {
     const { access_token } = context.req.cookies;
+    const user = context.req?.user?.user;
     return {
       status: HttpStatus.OK,
       success: {
+        name: user.username,
+        id: user.id,
         access_token,
       },
     };
