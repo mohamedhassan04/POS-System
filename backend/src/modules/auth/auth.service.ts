@@ -22,15 +22,19 @@ export class AuthenticationService {
     return null;
   }
   /* Login function */
-  async login(user: User, loginUserInput: LoginUserInput) {
+  async login(user: User, loginUserInput?: LoginUserInput) {
+    const userLogin = await this.userService.findOneUserByUsername(
+      user.username,
+    );
     const payload = {
       username: loginUserInput.username,
       sub: {
-        id: user.id,
+        id: userLogin.id,
         username: loginUserInput.username,
-        role: user.role,
+        role: userLogin.role,
       },
     };
+
     return {
       status: 200,
       success: {

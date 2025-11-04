@@ -3,6 +3,10 @@ import { UserService } from './user.service';
 import { User } from './entities/user.entity';
 import { CreateUserInput } from './dto/create-user.input';
 import { UserResponse } from './dto/user-response.input';
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { Roles } from 'src/shared/decorators/roles.decorator';
+import { RolesGuard } from '../auth/guards/roles.guard';
 
 @Resolver(() => User)
 export class UserResolver {
@@ -33,6 +37,8 @@ export class UserResolver {
   }
 
   @Mutation(() => UserResponse)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('admin')
   removeUser(
     @Args('id', { type: () => String }) id: string,
   ): Promise<UserResponse> {

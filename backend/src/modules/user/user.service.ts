@@ -52,7 +52,7 @@ export class UserService {
   async findOneUserByUsername(username: string) {
     return this._userRepository.findOne({
       where: { username },
-      select: ['id', 'username', 'password', 'displayName'],
+      select: ['id', 'username', 'password', 'displayName', 'role'],
     });
   }
 
