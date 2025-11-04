@@ -8,6 +8,26 @@ type AccessTokenObject {
   name: String
 }
 
+type Category {
+  createdAt: DateTime!
+  id: String!
+  name: String!
+  products: [Product!]
+  updatedAt: DateTime!
+  user: User!
+}
+
+input CreateCategoryInput {
+  name: String!
+  productIds: [String!]
+}
+
+input CreateProductInput {
+  available: Boolean! = true
+  name: String!
+  price: Float!
+}
+
 input CreateUserInput {
   displayName: String
   password: String!
@@ -36,24 +56,43 @@ input LoginUserInput {
 }
 
 type Mutation {
+  createCategory(createCategoryInput: CreateCategoryInput!): Category!
+  createProduct(createProductInput: CreateProductInput!): Product!
   createUser(createUserInput: CreateUserInput!): UserResponse!
   login(loginUserInput: LoginUserInput!): LoginResponse!
   logout: LoginResponse!
+  removeCategory(id: String!): UserResponse!
+  removeProduct(id: String!): UserResponse!
   removeUser(id: String!): UserResponse!
+}
+
+type Product {
+  available: Boolean!
+  category: Category!
+  createdAt: DateTime!
+  id: String!
+  name: String!
+  price: Float!
+  updatedAt: DateTime!
+  user: User!
 }
 
 type Query {
   current: CurrentUserResponse!
+  findAllProducts: [Product!]!
+  findAllProductsByCategory(categoryName: String!): [Product!]!
+  findOneProductById(id: String!): Product!
   getAllUsers: [User!]!
   getUserById(id: String!): User!
   getUserByUsername(username: String!): User!
 }
 
 type User {
+  categories: [Category!]
   createdAt: DateTime!
   displayName: String!
   id: String!
-  password: String!
+  products: [Product!]
   role: String!
   updatedAt: DateTime!
   username: String!

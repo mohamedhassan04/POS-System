@@ -1,7 +1,9 @@
 import { Field, HideField, ObjectType } from '@nestjs/graphql';
+import { Category } from 'src/modules/category/entities/category.entity';
+import { Product } from 'src/modules/product/entities/product.entity';
 import { UserRole } from 'src/shared/enum/enum.type';
 import { Node } from 'src/shared/node/common.entity';
-import { Entity, Column } from 'typeorm';
+import { Entity, Column, OneToMany } from 'typeorm';
 
 @Entity({ name: 'tb_users' })
 @ObjectType()
@@ -11,7 +13,7 @@ export class User extends Node {
   username: string;
 
   @Column()
-  @Field()
+  @HideField()
   password: string;
 
   @Column({ nullable: true })
@@ -21,4 +23,12 @@ export class User extends Node {
   @Column({ type: 'enum', enum: UserRole, default: UserRole.USER })
   @Field({ defaultValue: UserRole.USER })
   role: UserRole;
+
+  @OneToMany(() => Product, (product) => product.user)
+  @Field(() => [Product], { nullable: true })
+  products?: Product[];
+
+  @OneToMany(() => Category, (category) => category.user)
+  @Field(() => [Category], { nullable: true })
+  categories?: Category[];
 }
