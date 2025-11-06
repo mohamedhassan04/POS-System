@@ -22,10 +22,26 @@ input CreateCategoryInput {
   productIds: [String!]
 }
 
+input CreateOrderInput {
+  items: [CreateOrderItemInput!]!
+  tableId: String!
+}
+
+input CreateOrderItemInput {
+  productId: String!
+  quantity: Int!
+}
+
 input CreateProductInput {
   available: Boolean! = true
   name: String!
   price: Float!
+}
+
+input CreateTableInput {
+  capacity: Float!
+  isOccupied: Boolean! = false
+  number: String!
 }
 
 input CreateUserInput {
@@ -57,13 +73,41 @@ input LoginUserInput {
 
 type Mutation {
   createCategory(createCategoryInput: CreateCategoryInput!): Category!
+  createOrder(createOrderInput: CreateOrderInput!): Order!
   createProduct(createProductInput: CreateProductInput!): Product!
+  createTable(createTableInput: CreateTableInput!): UserResponse!
   createUser(createUserInput: CreateUserInput!): UserResponse!
   login(loginUserInput: LoginUserInput!): LoginResponse!
   logout: LoginResponse!
   removeCategory(id: String!): UserResponse!
   removeProduct(id: String!): UserResponse!
   removeUser(id: String!): UserResponse!
+  updateDisponibilityOfTable(id: String!): UserResponse!
+}
+
+type Order {
+  createdAt: DateTime!
+  deliveredAt: DateTime
+  id: String!
+  items: [OrderItem!]!
+  readyAt: DateTime
+  startedAt: String
+  status: String!
+  table: Table!
+  totalAmount: Float
+  updatedAt: DateTime!
+  user: User!
+}
+
+type OrderItem {
+  createdAt: DateTime!
+  expectedTime: Float!
+  id: String!
+  order: Order!
+  price: Float!
+  product: Product!
+  quantity: Float!
+  updatedAt: DateTime!
 }
 
 type Product {
@@ -72,6 +116,8 @@ type Product {
   createdAt: DateTime!
   id: String!
   name: String!
+  orderItems: [OrderItem!]
+  preparationTime: Float!
   price: Float!
   updatedAt: DateTime!
   user: User!
@@ -79,12 +125,24 @@ type Product {
 
 type Query {
   current: CurrentUserResponse!
+  findAllOrders: [Order!]!
   findAllProducts: [Product!]!
   findAllProductsByCategory(categoryName: String!): [Product!]!
+  findAllTables: [Table!]!
   findOneProductById(id: String!): Product!
   getAllUsers: [User!]!
   getUserById(id: String!): User!
   getUserByUsername(username: String!): User!
+}
+
+type Table {
+  capacity: Float!
+  createdAt: DateTime!
+  id: String!
+  isOccupied: Boolean
+  number: String!
+  orders: [Order!]
+  updatedAt: DateTime!
 }
 
 type User {
@@ -92,6 +150,7 @@ type User {
   createdAt: DateTime!
   displayName: String!
   id: String!
+  orders: [Order!]
   products: [Product!]
   role: String!
   updatedAt: DateTime!

@@ -1,5 +1,6 @@
 import { Field, HideField, ObjectType } from '@nestjs/graphql';
 import { Category } from 'src/modules/category/entities/category.entity';
+import { Order } from 'src/modules/orders/entities/order.entity';
 import { Product } from 'src/modules/product/entities/product.entity';
 import { UserRole } from 'src/shared/enum/enum.type';
 import { Node } from 'src/shared/node/common.entity';
@@ -31,4 +32,8 @@ export class User extends Node {
   @OneToMany(() => Category, (category) => category.user)
   @Field(() => [Category], { nullable: true })
   categories?: Category[];
+
+  @OneToMany(() => Order, (order) => order.user)
+  @Field(() => [Order], { nullable: true })
+  orders: Order[];
 }

@@ -3,3 +3,10 @@ export enum UserRole {
   CHEF = 'chef',
   ADMIN = 'admin',
 }
+
+export enum OrderStatus {
+  PENDING = 'pending',
+  IN_PROGRESS = 'in progress',
+  READY = 'ready',
+  SERVED = 'served',
+}
