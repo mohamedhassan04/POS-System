@@ -8,6 +8,8 @@ import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from 'src/shared/decorators/roles.decorator';
+import { UserResponse } from '../user/dto/user-response.input';
+import { OrderStatus } from 'src/shared/enum/enum.type';
 
 @Resolver(() => Order)
 export class OrdersResolver {
@@ -28,5 +30,20 @@ export class OrdersResolver {
   @Roles('admin')
   async findAllOrders() {
     return await this.ordersService.findAllOrders();
+  }
+
+  @Query(() => [Order], { name: 'getActiveOrdersWithDuration' })
+  async getActiveOrdersWithDuration() {
+    return await this.ordersService.getActiveOrdersWithDuration();
+  }
+
+  @Mutation(() => UserResponse)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('admin')
+  async updateOrdersStatus(
+    @Args('id') id: string,
+    @Args('status') status: OrderStatus,
+  ) {
+    return await this.ordersService.updateOrdersStatus(id, status);
   }
 }

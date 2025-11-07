@@ -83,20 +83,24 @@ type Mutation {
   removeProduct(id: String!): UserResponse!
   removeUser(id: String!): UserResponse!
   updateDisponibilityOfTable(id: String!): UserResponse!
+  updateOrdersStatus(id: String!, status: String!): UserResponse!
 }
 
 type Order {
+  avrgWaitingTime: String
   createdAt: DateTime!
   deliveredAt: DateTime
   id: String!
   items: [OrderItem!]!
   readyAt: DateTime
+  remainingTime: String
   startedAt: String
   status: String!
   table: Table!
   totalAmount: Float
   updatedAt: DateTime!
   user: User!
+  waitingDuration: String
 }
 
 type OrderItem {
@@ -130,6 +134,7 @@ type Query {
   findAllProductsByCategory(categoryName: String!): [Product!]!
   findAllTables: [Table!]!
   findOneProductById(id: String!): Product!
+  getActiveOrdersWithDuration: [Order!]!
   getAllUsers: [User!]!
   getUserById(id: String!): User!
   getUserByUsername(username: String!): User!

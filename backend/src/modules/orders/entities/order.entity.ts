@@ -41,6 +41,18 @@ export class Order extends Node {
   @Field({ nullable: true })
   deliveredAt?: Date;
 
+  @Column({ type: 'time', nullable: true })
+  @Field(() => String, { nullable: true })
+  waitingDuration?: string;
+
+  @Column({ type: 'time', nullable: true })
+  @Field(() => String, { nullable: true })
+  remainingTime?: string;
+
+  @Column({ type: 'time', nullable: true })
+  @Field(() => String, { nullable: true })
+  avrgWaitingTime?: string;
+
   @Column({ type: 'decimal', precision: 10, scale: 2, default: 0 })
   @Field({ nullable: true })
   totalAmount: number;
