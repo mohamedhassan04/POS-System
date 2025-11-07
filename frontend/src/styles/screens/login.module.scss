@@ -1,0 +1,43 @@
+@use "../variables";
+@use "../mixins";
+
+.pos--login-container {
+  @include flex-center;
+  background-image: url("/images/bg-login.jpg");
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+}
+
+.pos--login-form {
+  @include flex-center;
+  flex-direction: column;
+  gap: 1.5rem;
+  backdrop-filter: blur(8px);
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  max-width: 500px;
+  padding: 3rem 2rem;
+  border-radius: variables.$border-radius-16;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+
+  h1 {
+    @include color(variables.$white-color);
+    @include font-size(2.5rem);
+    font-family: variables.$font-family-saira !important;
+    font-weight: variables.$font-weight-semibold !important;
+    font-variation-settings: "wght" variables.$font-weight-semibold !important;
+  }
+
+  .pos--input-field {
+    padding: 0.8rem 1rem;
+  }
+
+  .pos--login-button {
+    padding: 1.5rem 1rem;
+    border-radius: variables.$border-radius-16;
+    font-family: variables.$font-family-saira !important;
+    font-weight: variables.$font-weight-semibold !important;
+    font-variation-settings: "wght" variables.$font-weight-semibold !important;
+  }
+}

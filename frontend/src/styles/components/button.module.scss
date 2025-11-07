@@ -1,0 +1,78 @@
+@use "../variables";
+@use "../mixins";
+
+.ct--button {
+  @include flex-center;
+  border-radius: variables.$border-radius-16;
+  transition: all 0.3s ease;
+  position: relative;
+
+  &-primary {
+    width: 100%;
+    background: variables.$green-primary-color !important;
+    border: none !important;
+    @include color($white-color !important);
+    font-family: variables.$font-family-saira !important;
+    font-weight: variables.$font-weight-semibold;
+    font-variation-settings: "wght" variables.$font-weight-semibold;
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+
+  &-outlined {
+    width: 100%;
+    background: transparent !important;
+    border: 1px solid variables.$green-primary-color !important;
+    @include color($green-primary-color !important);
+    font-family: variables.$font-family-saira !important;
+    font-weight: variables.$font-weight-semibold;
+    font-variation-settings: "wght" variables.$font-weight-semibold;
+
+    &:hover {
+      background: rgba(variables.$green-primary-color, 0.05) !important;
+    }
+  }
+
+  &-secondary {
+    width: 100%;
+    background: variables.$green-primary-color !important;
+    border: none !important;
+    @include color($white-color !important);
+    font-family: variables.$font-family-saira !important;
+    font-weight: variables.$font-weight-semibold;
+    font-variation-settings: "wght" variables.$font-weight-semibold;
+
+    &:hover {
+      background: variables.$green-primary-color !important;
+    }
+  }
+}
+
+.button__content {
+  @include flex-center;
+  width: 100%;
+  position: relative;
+  gap: 8px;
+}
+
+.button__text {
+  flex: 1;
+  text-align: center;
+}
+
+.button__icon {
+  @include flex-center;
+}
+
+.button--with-icon-start {
+  .button__content {
+    justify-content: space-between;
+  }
+}
+
+.button--with-icon-end {
+  .button__content {
+    justify-content: space-between;
+  }
+}

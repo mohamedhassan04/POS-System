@@ -1,0 +1,70 @@
+@use "../variables";
+@use "../mixins";
+
+.pos--category-wrapper {
+  position: relative;
+  width: 100%;
+  padding: 10px 40px;
+}
+
+.pos--category-container {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  gap: 16px;
+  scroll-behavior: smooth;
+  padding-bottom: 10px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.pos--category-card {
+  @include color(variables.$gray-light-color);
+  @include font-size(0.9);
+  width: 120px;
+  height: 140px;
+  text-align: center;
+  border-radius: variables.$border-radius-16;
+  background-color: variables.$white-color;
+  border: none;
+  cursor: pointer;
+  font-family: variables.$font-family-saira !important;
+  font-weight: variables.$font-weight-medium !important;
+  font-variation-settings: "wght" variables.$font-weight-medium !important;
+  font-style: italic !important;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+  img {
+    width: 70%;
+    height: 70%;
+    object-fit: cover;
+    border-radius: variables.$border-radius-16;
+    margin-bottom: 0.7rem;
+  }
+
+  &:hover {
+    border: 1px solid variables.$black-matte-color !important;
+    transition: all 0.3s ease-in-out;
+  }
+}
+
+.active {
+  border: 1px solid variables.$black-matte-color !important;
+  transition: all 0.3s ease-in-out;
+}
+
+.pos--category-button-left {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.pos--category-button-right {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  z-index: 1;
+}

@@ -1,0 +1,56 @@
+@use "../variables";
+@use "../mixins";
+
+.ct--input-wrapper {
+  @include flex-column(0);
+  width: 100%;
+}
+
+.ct--input-field {
+  font-family: variables.$font-family-saira !important;
+  border: 2px solid variables.$black-matte-color !important;
+  background-color: variables.$gray-bg-color !important;
+  border-radius: variables.$border-radius-16 !important;
+
+  &::placeholder {
+    @include color($gray-placeholder-color !important);
+  }
+
+  &:focus,
+  &:hover {
+    border-color: variables.$black-matte-color !important;
+    box-shadow: none !important;
+  }
+}
+
+.ct--input-field :global(.ant-input-suffix .anticon) {
+  @include color($black-matte-color !important);
+  transition: color 0.2s ease;
+
+  &:hover {
+    @include color($black-matte-color !important);
+  }
+}
+
+/** Search Input */
+
+.ct--input-search {
+  font-family: variables.$font-family-saira !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: variables.$border-radius-30 !important;
+  border: 2px solid variables.$black-matte-color !important;
+
+  &::placeholder {
+    @include color($gray-placeholder-color !important);
+  }
+
+  &:focus,
+  &:hover {
+    border-color: variables.$black-matte-color !important;
+    box-shadow: none !important;
+  }
+
+  input {
+    @include padding-left(1rem !important);
+  }
+}
