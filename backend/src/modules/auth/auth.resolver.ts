@@ -8,7 +8,6 @@ import {
   LoginUserInput,
 } from '../user/dto/login-user.input';
 import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { Roles } from 'src/shared/decorators/roles.decorator';
 
 @Resolver()
 export class AuthenticationResolver {

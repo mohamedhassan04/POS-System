@@ -28,6 +28,7 @@ const Category: React.FC = () => {
       icon: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='128' height='128'><rect rx='20' width='128' height='128' fill='%23FFD6A5'/><text x='50%' y='54%' font-size='64' dominant-baseline='middle' text-anchor='middle'>🍕</text></svg>",
       shortcutKey: "1",
       order: 1,
+      number_of_items: 10,
     },
     {
       id: "cat_drink",
@@ -36,6 +37,7 @@ const Category: React.FC = () => {
       icon: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='128' height='128'><rect rx='20' width='128' height='128' fill='%23CDE7FF'/><text x='50%' y='54%' font-size='60' dominant-baseline='middle' text-anchor='middle'>🥤</text></svg>",
       shortcutKey: "2",
       order: 2,
+      number_of_items: 15,
     },
     {
       id: "cat_water",
@@ -44,6 +46,7 @@ const Category: React.FC = () => {
       icon: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='128' height='128'><rect rx='20' width='128' height='128' fill='%23E0F7FF'/><text x='50%' y='54%' font-size='64' dominant-baseline='middle' text-anchor='middle'>💧</text></svg>",
       shortcutKey: "3",
       order: 3,
+      number_of_items: 5,
     },
     {
       id: "cat_rice",
@@ -52,6 +55,7 @@ const Category: React.FC = () => {
       icon: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='128' height='128'><rect rx='20' width='128' height='128' fill='%23FFF3B0'/><text x='50%' y='54%' font-size='54' dominant-baseline='middle' text-anchor='middle'>🍚</text></svg>",
       shortcutKey: "4",
       order: 4,
+      number_of_items: 4,
     },
     {
       id: "cat_dessert",
@@ -60,6 +64,7 @@ const Category: React.FC = () => {
       icon: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='128' height='128'><rect rx='20' width='128' height='128' fill='%23FFE6F0'/><text x='50%' y='54%' font-size='56' dominant-baseline='middle' text-anchor='middle'>🍰</text></svg>",
       shortcutKey: "5",
       order: 5,
+      number_of_items: 8,
     },
     {
       id: "cat_coffee",
@@ -68,6 +73,7 @@ const Category: React.FC = () => {
       icon: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='128' height='128'><rect rx='20' width='128' height='128' fill='%23F5E1C8'/><text x='50%' y='54%' font-size='60' dominant-baseline='middle' text-anchor='middle'>☕</text></svg>",
       shortcutKey: "6",
       order: 6,
+      number_of_items: 8,
     },
     {
       id: "cat_beer",
@@ -76,6 +82,7 @@ const Category: React.FC = () => {
       icon: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='128' height='128'><rect rx='20' width='128' height='128' fill='%23FFF1D6'/><text x='50%' y='54%' font-size='60' dominant-baseline='middle' text-anchor='middle'>🍺</text></svg>",
       shortcutKey: "7",
       order: 7,
+      number_of_items: 15,
     },
     {
       id: "cat_sandwich",
@@ -84,6 +91,7 @@ const Category: React.FC = () => {
       icon: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='128' height='128'><rect rx='20' width='128' height='128' fill='%23D9FFD6'/><text x='50%' y='54%' font-size='56' dominant-baseline='middle' text-anchor='middle'>🥪</text></svg>",
       shortcutKey: "8",
       order: 8,
+      number_of_items: 17,
     },
   ];
 
@@ -114,7 +122,10 @@ const Category: React.FC = () => {
               }`}
             >
               <img src={cat.icon} alt={cat.title} />
-              <span>{cat.title}</span>
+              <div>
+                <span>{cat.title}</span>
+                <p>{cat.number_of_items} articles</p>
+              </div>
             </Card>
           </div>
         ))}

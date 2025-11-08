@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import Loader from "./components/Loader";
 import Home from "./screens/main/Home";
+import ProtectedRoute from "./apis/utils/ProtectedRoute";
 
 const Login = lazy(() => import("./screens/login/Login"));
 
@@ -11,7 +12,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
 
-        <Route path="/main" element={<Home />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/main" element={<Home />} />
+        </Route>
       </Routes>
     </Suspense>
   );

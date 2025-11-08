@@ -1,0 +1,71 @@
+@use "../variables";
+@use "../mixins";
+
+.pos--food-card-container {
+  width: 100%;
+  border-radius: variables.$border-radius-16;
+  background-color: variables.$white-color;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.pos--food-card-image {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: variables.$border-radius-16;
+}
+
+.pos--food-card-content {
+  padding: 0.2rem;
+  h3 {
+    @include font-size(1.1);
+    font-family: variables.$font-family-saira !important;
+    font-weight: variables.$font-weight-semibold !important;
+    font-variation-settings: "wght" variables.$font-weight-semibold !important;
+  }
+  span {
+    @include font-size(0.95);
+    @include color(variables.$green-primary-color);
+    font-family: variables.$font-family-saira !important;
+    font-weight: variables.$font-weight-semibold !important;
+    font-variation-settings: "wght" variables.$font-weight-semibold !important;
+  }
+  p {
+    @include font-size(0.8);
+    @include color(variables.$gray-light-color);
+    font-family: variables.$font-family-saira !important;
+    font-weight: variables.$font-weight-normal !important;
+    font-variation-settings: "wght" variables.$font-weight-normal !important;
+    font-style: italic;
+  }
+}
+
+.pos--food-card-quantity {
+  @include flex-center;
+  gap: 0.5rem;
+  padding-top: 0.7rem;
+}
+
+.pos--quantity-input {
+  width: 100%;
+  border: none !important;
+  :global(.ant-input-number-input) {
+    text-align: center !important;
+    font-family: variables.$font-family-saira !important;
+    font-weight: variables.$font-weight-semibold !important;
+    font-variation-settings: "wght" variables.$font-weight-semibold !important;
+  }
+}
+
+.pos--quantity-button {
+  @include flex-center;
+  background: variables.$green-primary-color !important;
+  border: none !important;
+  svg {
+    color: variables.$black-matte-color !important;
+    transition: all 0.3s ease;
+    &:hover {
+      color: variables.$white-color !important;
+    }
+  }
+}

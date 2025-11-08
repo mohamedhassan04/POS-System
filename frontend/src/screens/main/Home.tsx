@@ -8,17 +8,17 @@ const MenuItems = lazy(() => import("./MenuItems"));
 
 const Home: React.FC = () => {
   return (
-    <section style={{ minHeight: "100vh" }}>
+    <section style={{ backgroundColor: "#f1f1f1", minHeight: "100vh" }}>
       <Suspense fallback={<Loader />}>
-        <Row style={{ gap: "1rem" }}>
+        <Row>
           <Col
-            xxl={15}
-            xl={15}
-            lg={15}
+            xxl={16}
+            xl={16}
+            lg={16}
             md={24}
             sm={24}
             xs={24}
-            style={{ padding: "1rem" }}
+            style={{ padding: "1rem", borderRight: "1px solid #adadadc0" }}
           >
             <OrdersStatus />
             <Category />

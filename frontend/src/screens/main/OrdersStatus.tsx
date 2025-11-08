@@ -32,7 +32,7 @@ const OrdersStatus: React.FC = () => {
       <Row justify={"center"} className={styles["orders-status-wrapper"]}>
         {data &&
           data.map((item) => (
-            <Col xxl={8} xl={6} lg={8} md={24} sm={24} xs={24}>
+            <Col xxl={6} xl={6} lg={7} md={7} sm={24} xs={24}>
               <Card size="small" className={styles["orders-status-card"]}>
                 <div className={styles["orders-status-title"]}>
                   <img src={item.image} alt="orders" width={20} />

@@ -6,6 +6,7 @@
   background-image: url("/images/bg-login.jpg");
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   min-height: 100vh;
 }
 
@@ -29,6 +30,14 @@
     font-variation-settings: "wght" variables.$font-weight-semibold !important;
   }
 
+  p {
+    @include color(variables.$white-color);
+    @include font-size(1rem);
+    font-family: variables.$font-family-saira !important;
+    font-weight: variables.$font-weight-semibold !important;
+    font-variation-settings: "wght" variables.$font-weight-semibold !important;
+  }
+
   .pos--input-field {
     padding: 0.8rem 1rem;
   }
@@ -40,4 +49,8 @@
     font-weight: variables.$font-weight-semibold !important;
     font-variation-settings: "wght" variables.$font-weight-semibold !important;
   }
+}
+
+.pos--login-form-inputs {
+  width: 100%;
 }
