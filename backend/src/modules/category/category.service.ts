@@ -32,6 +32,15 @@ export class CategoryService {
     });
   }
 
+  async findAllCategory() {
+    const categories = await this._categoryRepository
+      .createQueryBuilder('category')
+      .leftJoinAndSelect('category.products', 'product')
+      .orderBy('category.createdAt', 'DESC')
+      .getMany();
+    return categories;
+  }
+
   async removeCategory(id: string) {
     const category = await this._categoryRepository.findOneBy({ id });
     if (!category) {

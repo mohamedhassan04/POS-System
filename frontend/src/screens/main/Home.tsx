@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useState } from "react";
 import Loader from "../../components/Loader";
 import { Col, Row } from "antd";
 
@@ -7,6 +7,10 @@ const Category = lazy(() => import("./Category"));
 const MenuItems = lazy(() => import("./MenuItems"));
 
 const Home: React.FC = () => {
+  const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(
+    null
+  );
+
   return (
     <section style={{ backgroundColor: "#f1f1f1", minHeight: "100vh" }}>
       <Suspense fallback={<Loader />}>
@@ -18,11 +22,17 @@ const Home: React.FC = () => {
             md={24}
             sm={24}
             xs={24}
-            style={{ padding: "1rem", borderRight: "1px solid #adadadc0" }}
+            style={{
+              padding: "1rem",
+              borderRight: "1px solid #adadadc0",
+              height: "100vh",
+            }}
           >
             <OrdersStatus />
-            <Category />
-            <MenuItems />
+            <Category onSelectCategory={setSelectedCategoryId} />
+            {selectedCategoryId && (
+              <MenuItems categoryId={selectedCategoryId} />
+            )}
           </Col>
 
           <Col xxl={8} xl={8} lg={8} md={24} sm={24} xs={24}>

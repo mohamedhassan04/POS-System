@@ -30,10 +30,12 @@ export class ProductResolver {
   }
 
   @Query(() => [Product], { name: 'findAllProductsByCategory' })
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('admin')
   async findAllProductsByCategory(
-    @Args('categoryName', { type: () => String }) categoryName: string,
+    @Args('categoryId', { type: () => String }) categoryId: string,
   ) {
-    return await this.productService.findAllProductsByCategory(categoryName);
+    return await this.productService.findAllProductsByCategory(categoryId);
   }
 
   @Query(() => Product, { name: 'findOneProductById' })

@@ -1,4 +1,4 @@
-import { Resolver, Mutation, Args } from '@nestjs/graphql';
+import { Resolver, Mutation, Args, Query } from '@nestjs/graphql';
 import { CategoryService } from './category.service';
 import { Category } from './entities/category.entity';
 import { CreateCategoryInput } from './dto/create-category.input';
@@ -22,6 +22,13 @@ export class CategoryResolver {
     @GetUser() user: User,
   ) {
     return await this.categoryService.createCategory(createCategoryInput, user);
+  }
+
+  @Query(() => [Category], { name: 'findAllCategories' })
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('admin')
+  async findAllCategory() {
+    return await this.categoryService.findAllCategory();
   }
 
   @Mutation(() => UserResponse)

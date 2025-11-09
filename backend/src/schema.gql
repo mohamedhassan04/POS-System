@@ -129,9 +129,10 @@ type Product {
 
 type Query {
   current: CurrentUserResponse!
+  findAllCategories: [Category!]!
   findAllOrders: [Order!]!
   findAllProducts: [Product!]!
-  findAllProductsByCategory(categoryName: String!): [Product!]!
+  findAllProductsByCategory(categoryId: String!): [Product!]!
   findAllTables: [Table!]!
   findOneProductById(id: String!): Product!
   getActiveOrdersWithDuration: [Order!]!

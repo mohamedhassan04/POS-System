@@ -28,11 +28,11 @@ export class ProductService {
     return products;
   }
 
-  async findAllProductsByCategory(categoryName: string) {
+  async findAllProductsByCategory(categoryId: string) {
     const products = await this._productRepository
       .createQueryBuilder('product')
       .leftJoinAndSelect('product.category', 'category')
-      .where('category.name = :categoryName', { categoryName })
+      .where('category.id = :categoryId', { categoryId })
       .orderBy('product.createdAt', 'DESC')
       .getMany();
     return products;
