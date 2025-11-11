@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Card, InputNumber, Row } from "antd";
+import { Button, Card, InputNumber, Row, Tag } from "antd";
 import { useDispatch } from "react-redux";
 import { FaRegMinusSquare, FaRegPlusSquare } from "react-icons/fa";
 import styles from "../styles/screens/food-card.module.scss";
@@ -11,6 +11,7 @@ interface FoodCardProps {
   title: string;
   description: string;
   price: number;
+  available: boolean;
 }
 
 const FoodCard: React.FC<FoodCardProps> = ({
@@ -19,6 +20,7 @@ const FoodCard: React.FC<FoodCardProps> = ({
   title,
   description,
   price,
+  available,
 }) => {
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
@@ -46,9 +48,22 @@ const FoodCard: React.FC<FoodCardProps> = ({
           src={image}
           alt={title}
           className={styles["pos--food-card-image"]}
+          onClick={() => {
+            available ? handleAddToCart() : null;
+          }}
+          loading="lazy"
         />
         <div className={styles["pos--food-card-content"]}>
-          <h3>{title}</h3> <span>{price} DT</span>
+          <div>
+            <h3>{title}</h3>
+            {!available ? (
+              <Tag color="red">Non disponible</Tag>
+            ) : (
+              <Tag color="green">Disponible</Tag>
+            )}
+            <br />
+            <span>{price} DT</span>
+          </div>
           <p>{description}</p>
         </div>
       </Row>
@@ -77,15 +92,6 @@ const FoodCard: React.FC<FoodCardProps> = ({
           <FaRegPlusSquare size={18} />
         </Button>
       </div>
-
-      <Button
-        type="primary"
-        onClick={handleAddToCart}
-        block
-        style={{ marginTop: "10px" }}
-      >
-        Add to Cart
-      </Button>
     </Card>
   );
 };

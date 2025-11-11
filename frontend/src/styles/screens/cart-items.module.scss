@@ -1,0 +1,133 @@
+@use "../variables";
+@use "../mixins";
+
+.pos--cart-wrapper {
+  padding: 1rem;
+
+  h2 {
+    @include color(variables.$black-color);
+    @include font-size(1.5rem);
+    font-family: variables.$font-family-saira !important;
+    font-weight: variables.$font-weight-semibold !important;
+    font-variation-settings: "wght" variables.$font-weight-semibold !important;
+  }
+}
+
+.pos--select-table-wrapper {
+  @include flex-items-center(0.5rem);
+  justify-content: start;
+  padding: 2rem 0;
+
+  :global {
+    .ant-select {
+      border-radius: variables.$border-radius-16 !important;
+      background-color: variables.$white-color !important;
+      transition: all 0.3s ease;
+      font-family: variables.$font-family-saira !important;
+      font-weight: variables.$font-weight-normal !important;
+      font-variation-settings: "wght" variables.$font-weight-normal !important;
+
+      &:hover {
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+      }
+
+      .ant-select-selector {
+        border-radius: variables.$border-radius-16 !important;
+        padding: 1rem !important;
+        border: 1px solid variables.$green-primary-color !important;
+        background-color: variables.$white-color !important;
+        transition: all 0.3s ease;
+
+        &:hover {
+          border-color: variables.$green-primary-color !important;
+          background-color: variables.$white-color !important;
+        }
+      }
+
+      .ant-select-selection-placeholder {
+        @include color(variables.$gray-placeholder-color);
+        @include font-size(0.9);
+      }
+
+      .ant-select-selection-item {
+        @include color(variables.$green-primary-color !important);
+        @include font-size(0.9);
+        font-family: variables.$font-family-saira !important;
+        font-weight: variables.$font-weight-semibold !important;
+        font-variation-settings: "wght" variables.$font-weight-semibold !important;
+      }
+
+      .ant-select-arrow {
+        color: variables.$green-primary-color !important;
+      }
+
+      &.ant-select-open .ant-select-selector {
+        border-color: variables.$green-primary-color !important;
+        box-shadow: 0 0 0 3px rgba(22, 119, 255, 0.15);
+        background-color: variables.$white-color !important;
+      }
+    }
+  }
+}
+
+.pos--quantity-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  background: variables.$green-primary-color !important;
+  border: none !important;
+  svg {
+    @include flex-items-center(0.5rem);
+    color: variables.$white-color !important;
+    transition: all 0.3s ease;
+    &:hover {
+      color: variables.$white-color !important;
+    }
+  }
+}
+
+.pos--cart-item-name {
+  @include color(variables.$black-color);
+  @include font-size(0.95);
+  font-family: variables.$font-family-saira !important;
+  font-weight: variables.$font-weight-semibold !important;
+  font-variation-settings: "wght" variables.$font-weight-semibold !important;
+}
+
+.pos--cart-item-description {
+  @include color(variables.$green-primary-color);
+  @include font-size(0.9);
+  font-family: variables.$font-family-saira !important;
+  font-weight: variables.$font-weight-semibold !important;
+  font-variation-settings: "wght" variables.$font-weight-semibold !important;
+}
+
+.pos--total-wrapper {
+  @include flex-items-center();
+  justify-content: space-between;
+
+  span {
+    @include color(variables.$black-color);
+    @include font-size(1.1);
+    font-family: variables.$font-family-saira !important;
+    font-weight: variables.$font-weight-semibold !important;
+    font-variation-settings: "wght" variables.$font-weight-semibold !important;
+  }
+}
+
+.pos--empty-text {
+  @include color(variables.$gray-light-color);
+  @include font-size(0.9);
+  font-family: variables.$font-family-saira !important;
+  font-weight: variables.$font-weight-semibold !important;
+  font-variation-settings: "wght" variables.$font-weight-semibold !important;
+  font-style: italic;
+}
+
+.pos--cart-item-image {
+  width: 100px;
+  object-fit: cover;
+  border-radius: variables.$border-radius-16;
+}

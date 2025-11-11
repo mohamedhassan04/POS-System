@@ -12,6 +12,7 @@ export const categoryApi = api.injectEndpoints({
                findAllCategories {
                  id
                  name
+                 image
                  products {
                  name
                  price
@@ -34,6 +35,8 @@ export const categoryApi = api.injectEndpoints({
             id
             name
             price
+           image
+            available
           }
         }
       `,

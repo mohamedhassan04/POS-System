@@ -11,6 +11,7 @@ type AccessTokenObject {
 type Category {
   createdAt: DateTime!
   id: String!
+  image: String!
   name: String!
   products: [Product!]
   updatedAt: DateTime!
@@ -35,6 +36,7 @@ input CreateOrderItemInput {
 input CreateProductInput {
   available: Boolean! = true
   name: String!
+  preparationTime: Float!
   price: Float!
 }
 
@@ -124,6 +126,7 @@ type Product {
   category: Category!
   createdAt: DateTime!
   id: String!
+  image: String
   name: String!
   orderItems: [OrderItem!]
   preparationTime: Float!

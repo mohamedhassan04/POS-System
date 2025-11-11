@@ -1,16 +1,17 @@
 import React, { lazy, Suspense, useState } from "react";
 import Loader from "../../components/Loader";
-import { Col, Row } from "antd";
+import { Col, FloatButton, Row } from "antd";
 import CartItems from "./CartItems";
-import Button from "../../components/Button";
 import { useLogoutMutation } from "../../apis/actions/auth.action";
+import { LuLogOut } from "react-icons/lu";
+import styles from "../../styles/screens/orders-status.module.scss";
 
 const OrdersStatus = lazy(() => import("./OrdersStatus"));
 const Category = lazy(() => import("./Category"));
 const MenuItems = lazy(() => import("./MenuItems"));
 
 const Home: React.FC = () => {
-  const [logout, { isLoading }] = useLogoutMutation();
+  const [logout] = useLogoutMutation();
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(
     null
   );
@@ -28,15 +29,7 @@ const Home: React.FC = () => {
   };
 
   return (
-    <section style={{ backgroundColor: "#f1f1f1", minHeight: "100vh" }}>
-      <Button
-        variant="secondary"
-        type="button"
-        onClick={handleLogout}
-        loading={isLoading}
-      >
-        Se déconnecter
-      </Button>
+    <section style={{ minHeight: "100vh" }}>
       <Suspense fallback={<Loader />}>
         <Row>
           <Col
@@ -63,6 +56,13 @@ const Home: React.FC = () => {
             <CartItems />
           </Col>
         </Row>
+
+        <FloatButton
+          icon={<LuLogOut />}
+          tooltip="Se déconnecter"
+          onClick={handleLogout}
+          className={styles["pos--logout-button"]}
+        />
       </Suspense>
     </section>
   );

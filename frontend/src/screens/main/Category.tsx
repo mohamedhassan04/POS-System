@@ -62,10 +62,7 @@ const Category: React.FC<CategoryProps> = ({ onSelectCategory }) => {
                   activeCategory === cat.id ? styles["active"] : ""
                 }`}
               >
-                <img
-                  src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='128' height='128'><rect rx='20' width='128' height='128' fill='%23FFD6A5'/><text x='50%' y='54%' font-size='64' dominant-baseline='middle' text-anchor='middle'>🍕</text></svg>"
-                  alt={cat.title}
-                />
+                <img src={cat?.image} alt={cat.title} />
                 <div>
                   <span>{cat?.name}</span>
                   <p>{cat?.products?.length} articles</p>

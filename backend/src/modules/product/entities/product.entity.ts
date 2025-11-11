@@ -24,6 +24,10 @@ export class Product extends Node {
   @Field()
   preparationTime: number;
 
+  @Column({ nullable: true })
+  @Field({ nullable: true })
+  image: string;
+
   @ManyToOne(() => User, (user) => user.products)
   @Field(() => User)
   user: User;

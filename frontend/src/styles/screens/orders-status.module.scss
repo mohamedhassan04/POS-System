@@ -27,3 +27,15 @@
     cursor: pointer;
   }
 }
+
+.pos--logout-button {
+  :global {
+    .ant-float-btn-body {
+      background-color: variables.$green-primary-color !important;
+      border: none !important;
+      svg {
+        @include color(variables.$white-color);
+      }
+    }
+  }
+}

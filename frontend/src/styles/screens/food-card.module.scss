@@ -62,10 +62,16 @@
   background: variables.$green-primary-color !important;
   border: none !important;
   svg {
-    color: variables.$black-matte-color !important;
+    color: variables.$white-color !important;
     transition: all 0.3s ease;
     &:hover {
       color: variables.$white-color !important;
     }
+  }
+}
+
+:global {
+  .ant-tag {
+    font-size: 12px !important;
   }
 }

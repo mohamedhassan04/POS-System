@@ -12,6 +12,10 @@ export class CreateProductInput {
   @IsNotEmpty()
   price: number;
 
+  @Field()
+  @IsNotEmpty()
+  preparationTime: number;
+
   @Field({ defaultValue: true })
   @IsNotEmpty()
   @IsBoolean()

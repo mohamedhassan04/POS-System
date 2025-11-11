@@ -1,15 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, Col, Row } from "antd";
 import styles from "../../styles/screens/orders-status.module.scss";
 import waiting from "../../assets/images/waiting.png";
 import progress from "../../assets/images/progress.png";
 import ready from "../../assets/images/completed.png";
-import { useFindAllOrdersByStatusQuery } from "../../apis/actions/order.action";
+import {
+  useFindAllOrdersByStatusQuery,
+  useGetActiveOrdersWithDurationQuery,
+} from "../../apis/actions/order.action";
+import ModalComponent from "../../components/ModalComponent";
 
 const OrdersStatus: React.FC = () => {
   const { data: backendData = [] } = useFindAllOrdersByStatusQuery(null, {
     skip: false,
   });
+  const { data: activeOrders } = useGetActiveOrdersWithDurationQuery(null, {
+    skip: false,
+  });
+
+  const [open, setOpen] = useState<boolean>(false);
+  const [selectedTitle, setSelectedTitle] = useState<any>();
 
   const localData = [
     {
@@ -33,13 +43,29 @@ const OrdersStatus: React.FC = () => {
     };
   });
 
+  const inProgressOrders =
+    activeOrders &&
+    activeOrders.filter((order: any) => order.status === "in progress");
+  const waitingOrders =
+    activeOrders &&
+    activeOrders.filter((order: any) => order.status === "pending");
+
+  const handleOpenModal = (item: string) => {
+    setSelectedTitle(item);
+    setOpen(true);
+  };
+
   return (
     <section>
       <Row justify={"center"} className={styles["orders-status-wrapper"]}>
         {mergedData &&
           mergedData.map((item: any) => (
             <Col xxl={6} xl={6} lg={7} md={7} sm={24} xs={24}>
-              <Card size="small" className={styles["orders-status-card"]}>
+              <Card
+                size="small"
+                className={styles["orders-status-card"]}
+                onClick={() => handleOpenModal(item)}
+              >
                 <div className={styles["orders-status-title"]}>
                   <img src={item.image} alt="orders" width={20} />
                   <span>{item.title}</span>
@@ -49,6 +75,33 @@ const OrdersStatus: React.FC = () => {
             </Col>
           ))}
       </Row>
+
+      <ModalComponent
+        title={selectedTitle?.title}
+        width={800}
+        open={open}
+        onClose={() => setOpen(false)}
+      >
+        {selectedTitle?.status === "pending" ? (
+          <ul>
+            {waitingOrders?.map((order: any) => (
+              <>
+                <li>{order?.avrgWaitingTime}</li>
+                <li>{order?.table.number}</li>
+              </>
+            ))}
+          </ul>
+        ) : selectedTitle?.status === "in progress" ? (
+          <ul>
+            {inProgressOrders?.map((order: any) => (
+              <>
+                <li>{order?.avrgWaitingTime}</li>
+                <li>{order?.table.number}</li>
+              </>
+            ))}
+          </ul>
+        ) : null}
+      </ModalComponent>
     </section>
   );
 };

@@ -11,6 +11,10 @@ export class Category extends Node {
   @Field()
   name: string;
 
+  @Column({ nullable: true })
+  @Field()
+  image: string;
+
   @ManyToOne(() => User, (user) => user.categories)
   @Field(() => User)
   user: User;
