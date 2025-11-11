@@ -10,6 +10,7 @@ import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from 'src/shared/decorators/roles.decorator';
 import { UserResponse } from '../user/dto/user-response.input';
 import { OrderStatus } from 'src/shared/enum/enum.type';
+import { OrderStatusInput } from './dto/order-status.input';
 
 @Resolver(() => Order)
 export class OrdersResolver {
@@ -30,6 +31,13 @@ export class OrdersResolver {
   @Roles('admin')
   async findAllOrders() {
     return await this.ordersService.findAllOrders();
+  }
+
+  @Query(() => [OrderStatusInput], { name: 'findAllOrdersByStatus' })
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('admin')
+  async findAllOrdersByStatus() {
+    return await this.ordersService.findAllOrdersByStatus();
   }
 
   @Query(() => [Order], { name: 'getActiveOrdersWithDuration' })

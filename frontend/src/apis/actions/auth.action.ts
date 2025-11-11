@@ -27,6 +27,24 @@ export const authApi = api.injectEndpoints({
       }),
     }),
 
+    logout: build.mutation({
+      query: () => ({
+        url: "",
+        method: "POST",
+        credentials: "include",
+        body: {
+          query: `
+           mutation {
+             logout {
+                name
+                access_token
+              }
+             }
+          `,
+        },
+      }),
+    }),
+
     getCurrentUser: build.query({
       query: () => ({
         url: "",
@@ -50,4 +68,5 @@ export const authApi = api.injectEndpoints({
   }),
 });
 
-export const { useLoginMutation, useGetCurrentUserQuery } = authApi;
+export const { useLoginMutation, useLogoutMutation, useGetCurrentUserQuery } =
+  authApi;

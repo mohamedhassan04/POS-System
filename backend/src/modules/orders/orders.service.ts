@@ -90,6 +90,27 @@ export class OrdersService {
     return orders;
   }
 
+  async findAllOrdersByStatus() {
+    const orders = await this._orderRepository
+      .createQueryBuilder('order')
+      .getMany();
+
+    if (!orders.length) return [];
+
+    const statusCounts = orders.reduce(
+      (acc, order) => {
+        acc[order.status] = (acc[order.status] || 0) + 1;
+        return acc;
+      },
+      {} as Record<string, number>,
+    );
+
+    return Object.entries(statusCounts).map(([status, count]) => ({
+      status,
+      count,
+    }));
+  }
+
   async updateOrdersStatus(id: string, status: OrderStatus) {
     const order = await this._orderRepository.findOne({ where: { id } });
     if (!order) throw new NotFoundException('Order not found');

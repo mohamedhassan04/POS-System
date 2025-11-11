@@ -114,6 +114,11 @@ type OrderItem {
   updatedAt: DateTime!
 }
 
+type OrderStatusInput {
+  count: Int!
+  status: String!
+}
+
 type Product {
   available: Boolean!
   category: Category!
@@ -131,6 +136,7 @@ type Query {
   current: CurrentUserResponse!
   findAllCategories: [Category!]!
   findAllOrders: [Order!]!
+  findAllOrdersByStatus: [OrderStatusInput!]!
   findAllProducts: [Product!]!
   findAllProductsByCategory(categoryId: String!): [Product!]!
   findAllTables: [Table!]!

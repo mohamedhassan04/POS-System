@@ -4,34 +4,40 @@ import styles from "../../styles/screens/orders-status.module.scss";
 import waiting from "../../assets/images/waiting.png";
 import progress from "../../assets/images/progress.png";
 import ready from "../../assets/images/completed.png";
+import { useFindAllOrdersByStatusQuery } from "../../apis/actions/order.action";
 
 const OrdersStatus: React.FC = () => {
-  const data = [
+  const { data: backendData = [] } = useFindAllOrdersByStatusQuery(null, {
+    skip: false,
+  });
+
+  const localData = [
     {
-      id: "1",
       title: "Les commandes en attente",
-      count: 5,
       image: waiting,
+      status: "pending",
     },
     {
-      id: "2",
       title: "Les commandes en cours",
-      count: 12,
       image: progress,
+      status: "in progress",
     },
-    {
-      id: "3",
-      title: "Les commandes en prête",
-      count: 15,
-      image: ready,
-    },
+    { title: "Les commandes en prête", image: ready, status: "ready" },
   ];
+
+  const mergedData = localData.map((item) => {
+    const backendItem = backendData.find((b: any) => b.status === item.status);
+    return {
+      ...item,
+      count: backendItem ? backendItem.count : 0,
+    };
+  });
 
   return (
     <section>
       <Row justify={"center"} className={styles["orders-status-wrapper"]}>
-        {data &&
-          data.map((item) => (
+        {mergedData &&
+          mergedData.map((item: any) => (
             <Col xxl={6} xl={6} lg={7} md={7} sm={24} xs={24}>
               <Card size="small" className={styles["orders-status-card"]}>
                 <div className={styles["orders-status-title"]}>

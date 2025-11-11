@@ -1,18 +1,42 @@
 import React, { lazy, Suspense, useState } from "react";
 import Loader from "../../components/Loader";
 import { Col, Row } from "antd";
+import CartItems from "./CartItems";
+import Button from "../../components/Button";
+import { useLogoutMutation } from "../../apis/actions/auth.action";
 
 const OrdersStatus = lazy(() => import("./OrdersStatus"));
 const Category = lazy(() => import("./Category"));
 const MenuItems = lazy(() => import("./MenuItems"));
 
 const Home: React.FC = () => {
+  const [logout, { isLoading }] = useLogoutMutation();
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(
     null
   );
 
+  const handleLogout = async () => {
+    try {
+      await logout({
+        name: null,
+        access_token: null,
+      }).unwrap();
+      window.location.href = "/";
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <section style={{ backgroundColor: "#f1f1f1", minHeight: "100vh" }}>
+      <Button
+        variant="secondary"
+        type="button"
+        onClick={handleLogout}
+        loading={isLoading}
+      >
+        Se déconnecter
+      </Button>
       <Suspense fallback={<Loader />}>
         <Row>
           <Col
@@ -36,9 +60,7 @@ const Home: React.FC = () => {
           </Col>
 
           <Col xxl={8} xl={8} lg={8} md={24} sm={24} xs={24}>
-            <div>
-              <h1>Cart Items</h1>
-            </div>
+            <CartItems />
           </Col>
         </Row>
       </Suspense>
